@@ -27,8 +27,7 @@ class HotelRepository extends ServiceEntityRepository
      */
     public function getAverageScoreById($hotelId)
     {
-        /*
-         Move to use query builder
+        /* TBD - Move to use query builder
         $rsm = new ResultSetMapping();
         $query = $this->createNativeQuery('
             SELECT hotel.id, hotel.name, AVG(review.rating) as average_rating  FROM hotel
