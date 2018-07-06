@@ -2,17 +2,17 @@
 
 namespace App\Controller;
 
-use App\Service\Widget as WidgetService;
+use App\Service\HotelWidget as HotelWidgetService;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class WidgetController extends Controller
 {
-    private $widgetService;
+    private $hotelWidgetService;
     
-    public function __construct(WidgetService $widgetService)
+    public function __construct(HotelWidgetService $hotelWidgetService)
     {
-        $this->widgetService = $widgetService;
+        $this->hotelWidgetService = $hotelWidgetService;
     }
 
     /**
@@ -20,8 +20,11 @@ class WidgetController extends Controller
      */
     public function index()
     {
+        $averageScore = $this->hotelWidgetService->getAverageScoreById(1);
         return $this->render('widget/index.html.twig', [
             'controller_name' => 'WidgetController',
+            'hotel' => $averageScore['name'],
+            'averageRating' => $averageScore['average_rating']
         ]);
     }
 }

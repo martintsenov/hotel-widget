@@ -5,7 +5,7 @@ namespace App\Service;
 use App\Repository\HotelRepository;
 use App\Repository\ReviewRepository;
 
-class Widget
+class HotelWidget
 {
     private $hotelRepository;
     private $reviewRepository;
@@ -20,11 +20,13 @@ class Widget
     
     /**
      * 
-     * @param int $id
+     * @param int $hotelId
      * @return type
      */
-    public function getHotelById(int $id)
+    public function getAverageScoreById(int $hotelId): array
     {
-        return $this->hotelRepository->find($id);
+        $data = $this->hotelRepository->getAverageScoreById($hotelId);
+        
+        return $data[0];
     }
 }

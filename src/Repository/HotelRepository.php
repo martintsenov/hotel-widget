@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Hotel;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\ResultSetMapping;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -17,6 +18,37 @@ class HotelRepository extends ServiceEntityRepository
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Hotel::class);
+    }
+    
+    /**
+     * 
+     * @param type $hotelId
+     * @return type
+     */
+    public function getAverageScoreById($hotelId)
+    {
+        /*
+         Move to use query builder
+        $rsm = new ResultSetMapping();
+        $query = $this->createNativeQuery('
+            SELECT hotel.id, hotel.name, AVG(review.rating) as average_rating  FROM hotel
+            LEFT JOIN review on hotel.id = review.hotel_id
+            WHERE hotel.id = ?
+            GROUP BY hotel.id', $rsm);
+        $query->setParameter(1, $hotelId);
+
+        $data = $query->getResult();
+        return $data;
+        */
+        $query = '
+            SELECT hotel.id, hotel.name, AVG(review.rating) as average_rating  FROM hotel
+            LEFT JOIN review on hotel.id = review.hotel_id
+            WHERE hotel.id = '.$hotelId.'
+            GROUP BY hotel.id';
+        $em = $this->getEntityManager();
+        $stmt = $em->getConnection()->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll();
     }
 
 //    /**
