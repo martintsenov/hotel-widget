@@ -4,7 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Hotel;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\Query\ResultSetMapping;
+use \Doctrine\ORM\Query\Expr as QueryExpression;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -19,63 +19,29 @@ class HotelRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Hotel::class);
     }
-    
+
     /**
      * 
      * @param type $hotelId
      * @return type
      */
-    public function getAverageScoreById($hotelId)
+    public function getAverageScoreById(int $hotelId): array
     {
-        /* TBD - Move to use query builder
-        $rsm = new ResultSetMapping();
-        $query = $this->createNativeQuery('
+        /*
             SELECT hotel.id, hotel.name, AVG(review.rating) as average_rating  FROM hotel
             LEFT JOIN review on hotel.id = review.hotel_id
-            WHERE hotel.id = ?
-            GROUP BY hotel.id', $rsm);
-        $query->setParameter(1, $hotelId);
-
-        $data = $query->getResult();
-        return $data;
-        */
-        $query = '
-            SELECT hotel.id, hotel.name, AVG(review.rating) as average_rating  FROM hotel
-            LEFT JOIN review on hotel.id = review.hotel_id
-            WHERE hotel.id = '.$hotelId.'
-            GROUP BY hotel.id';
-        $em = $this->getEntityManager();
-        $stmt = $em->getConnection()->prepare($query);
-        $stmt->execute();
-        return $stmt->fetchAll();
-    }
-
-//    /**
-//     * @return Hotel[] Returns an array of Hotel objects
-//     */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('h')
-            ->andWhere('h.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('h.id', 'ASC')
-            ->setMaxResults(10)
+            WHERE hotel.id = 1
+            GROUP BY hotel.id
+        */ 
+        $queryBuilder = $this->createQueryBuilder('h')
+            ->select('h.id, h.name, AVG(r.rating) as average_rating')
+            ->leftJoin('App\Entity\Review', 'r', QueryExpression\Join::WITH, 'h = r.hotel')
+            ->andWhere('h.id = :hotelId')
+            ->setParameter('hotelId', $hotelId)
+            ->groupBy('h.id');
+        
+        return $queryBuilder
             ->getQuery()
-            ->getResult()
-        ;
+            ->getArrayResult();
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Hotel
-    {
-        return $this->createQueryBuilder('h')
-            ->andWhere('h.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }
