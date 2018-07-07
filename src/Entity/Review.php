@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Review
@@ -25,6 +26,12 @@ class Review
      * @var bool
      *
      * @ORM\Column(name="rating", type="boolean", nullable=false)
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 100,
+     *      minMessage = "Rating must be at least 0 percentage",
+     *      maxMessage = "Rating cannot be bigger than 100 percentage"
+     * )
      */
     private $rating;
 
