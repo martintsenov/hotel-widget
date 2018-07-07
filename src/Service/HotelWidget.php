@@ -4,19 +4,14 @@ namespace App\Service;
 
 use App\Exception\NoResultException;
 use App\Repository\HotelRepository;
-use App\Repository\ReviewRepository;
 
 class HotelWidget
 {
     private $hotelRepository;
-    private $reviewRepository;
     
-    public function __construct(
-        HotelRepository $hotelRepository, 
-        ReviewRepository $reviewRepository
-    ) {
+    public function __construct(HotelRepository $hotelRepository) 
+    {
         $this->hotelRepository = $hotelRepository;
-        $this->reviewRepository = $reviewRepository;
     }
     
     /**
@@ -33,7 +28,14 @@ class HotelWidget
         if (count($data) == 0) {
             throw new NoResultException;
         }
+        
+        $result = $data[0];       
+        array_walk($result, function(&$value, $key) {
+            if ($key == 'average_rating') {
+                $value = (int) round($value);
+            } 
+        });
 
-        return $data[0];
+        return $result;
     }
 }
