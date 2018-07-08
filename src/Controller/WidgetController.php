@@ -17,14 +17,25 @@ class WidgetController extends Controller
     }
 
     /**
-     * @Route("/widget/{id}", name="widget")
+     * @Route("/widget/{id}.js", name="widget")
      */
     public function index($id)
+    {
+        return $this->render('widget/index.html.twig', [
+            'controller_name' => 'WidgetController',
+            'id' => $id,
+        ]);
+    }
+
+    /**
+     * @Route("/widget/get/{id}", name="widget-get")
+     */
+    public function widget($id)
     {        
         try {
             $averageScore = $this->hotelWidgetService->getAverageScoreById($id);
             
-            return $this->render('widget/index.html.twig', [
+            return $this->render('widget/widget.html.twig', [
                 'controller_name' => 'WidgetController',
                 'hotel' => $averageScore['name'],
                 'averageRating' => $averageScore['average_rating']

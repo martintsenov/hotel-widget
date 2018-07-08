@@ -30,6 +30,6 @@ apc.serializer=php
 
 Description of the Widget app workflow
 --------------------------------------
-* Hotel rating page `http://<host_url>/widget/<id>`
+* Get hotel rating widget with `http://<host_url>/widget/<widgetId>.js`
 * Unit tests `php bin/phpunit --debug --filter=HotelWidgetTest`
 * Functional tests `php bin/phpunit --debug --filter=WidgetControllerTest`
