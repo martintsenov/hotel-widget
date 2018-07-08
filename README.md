@@ -17,4 +17,4 @@ Requirements
 
 Description of the Widget app workflow
 --------------------------------------
-1. `http::/<host_url>/widget/<id>`
+1. `http://<host_url>/widget/<id>`
