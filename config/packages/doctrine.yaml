@@ -29,3 +29,4 @@ doctrine:
                 alias: App
         metadata_cache_driver: apcu
         query_cache_driver: apcu
+        result_cache_driver: apcu
