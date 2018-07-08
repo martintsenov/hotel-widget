@@ -19,7 +19,6 @@ Requirements
 - download dll https://pecl.php.net/package/APCu/5.1.8/windows (7.1 Thread Safe (TS) x86)
 - copy php_apcu.dll to  <php-folder>\php\ext
 - add in <php-folder>\php\php.ini
-extension=php_apcu.dll
 [apcu]
 extension=php_apcu.dll
 apc.enabled=1
@@ -31,4 +30,6 @@ apc.serializer=php
 
 Description of the Widget app workflow
 --------------------------------------
-1. `http://<host_url>/widget/<id>`
+* Hotel rating page `http://<host_url>/widget/<id>`
+* Unit tests `php bin/phpunit --debug --filter=HotelWidgetTest`
+* Functional tests `php bin/phpunit --debug --filter=WidgetControllerTest`

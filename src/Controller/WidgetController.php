@@ -35,6 +35,10 @@ class WidgetController extends Controller
                 'message' => 'No result found',
             ]);
         } catch (\Exception $ex) {
+            return $this->render('widget/no-result.html.twig', [
+                'controller_name' => 'WidgetController',
+                'message' => $ex->getMessage(),
+            ]);
         }
     }
 }
