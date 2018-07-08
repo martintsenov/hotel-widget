@@ -14,6 +14,20 @@ Requirements
 ------------
 * [Symfony 4.1](https://symfony.com/roadmap/4.1)
 * [PHP](https://secure.php.net/downloads.php) (7.1.*)
+* Install APCu extension for PHP (https://pecl.php.net/package/APCu)
+```
+- download dll https://pecl.php.net/package/APCu/5.1.8/windows (7.1 Thread Safe (TS) x86)
+- copy php_apcu.dll to  <php-folder>\php\ext
+- add in <php-folder>\php\php.ini
+extension=php_apcu.dll
+[apcu]
+extension=php_apcu.dll
+apc.enabled=1
+apc.shm_size=32M
+apc.ttl=7200
+apc.enable_cli=1
+apc.serializer=php
+```
 
 Description of the Widget app workflow
 --------------------------------------

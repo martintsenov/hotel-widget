@@ -42,6 +42,7 @@ class HotelRepository extends ServiceEntityRepository
         
         return $queryBuilder
             ->getQuery()
+            ->useResultCache(true)
             ->getArrayResult();
     }
 }
