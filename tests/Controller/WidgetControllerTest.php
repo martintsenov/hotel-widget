@@ -21,10 +21,10 @@ class WidgetControllerTest extends WebTestCase
     {
         return [
             [
-                '/widget/111',
+                '/widget/1.js',
             ],
             [
-                '/widget/1',
+                '/widget/get/1',
             ],
         ];
     }
