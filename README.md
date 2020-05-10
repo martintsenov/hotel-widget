@@ -13,8 +13,8 @@ Installation
 
 Requirements
 ------------
-* [Symfony 4.1](https://symfony.com/roadmap/4.1)
-* [PHP](https://secure.php.net/downloads.php) (7.1.*)
+* [Symfony 4.4](https://symfony.com/releases/4.4)
+* [PHP](https://secure.php.net/downloads.php) (7.2.*)
 * Install APCu extension for PHP (https://pecl.php.net/package/APCu)
 ```
 - download dll https://pecl.php.net/package/APCu/5.1.8/windows (7.1 Thread Safe (TS) x86)

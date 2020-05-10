@@ -5,8 +5,5 @@
 /vendor/
 ###< symfony/framework-bundle ###
 /nbproject
-###> symfony/phpunit-bridge ###
-.phpunit
-/phpunit.xml
-###< symfony/phpunit-bridge ###
 .idea
+composer.phar
